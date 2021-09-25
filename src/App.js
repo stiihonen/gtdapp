@@ -7,10 +7,36 @@ import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import { listTodos } from './graphql/queries';
 import { createTodo, deleteTodo, updateTodo } from './graphql/mutations';
 import Todo from './Todo';
+import { ReactAgenda , guid } from 'react-agenda';
 
 const initialFormState = { name: '', description: '' }
 
 function App() {
+  const colors= {
+    'color-1':"rgba(102, 195, 131 , 1)" ,
+    "color-2":"rgba(242, 177, 52, 1)" ,
+    "color-3":"rgba(235, 85, 59, 1)"
+  }
+  
+  var now = new Date();
+  
+  var items = [
+    {
+     _id            :guid(),
+      name          : 'Meeting , dev staff!',
+      startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 0),
+      endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0),
+      classes       : 'color-1'
+    },
+    {
+     _id            :guid(),
+      name          : 'Working lunch , Holly',
+      startDateTime : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 11, 0),
+      endDateTime   : new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 13, 0),
+      classes       : 'color-1'
+    },
+  ];
+
   const [todos, setTodos] = useState([]);
   const [projectsFormData, setProjectsFormData] = useState(initialFormState);
   const [callsFormData, setCallsFormData] = useState(initialFormState);
@@ -108,16 +134,16 @@ function App() {
         </Card>
         <Card><Card.Header>
           <Nav variant="tabs" defaultActiveKey="#nextActions">
-            <Nav.Item><Nav.Link href="#nextActions">NEXT ACTIONS</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link href="#nextActions">NEXT ACTIONS</Nav.Link></Nav.Item>
           </Nav>
           <Nav>
-            <Nav.Item><Nav.Link href="#waitingFors">WAITING FOR's...</Nav.Link></Nav.Item>
+          <Nav.Item><Nav.Link href="#waitingFors">WAITING FOR's...</Nav.Link></Nav.Item>
           </Nav>
         </Card.Header>
         <Card.Body className="text-start">
         <ListGroup>
           <ListGroup.Item>
-          <h3><Badge>CALLS</Badge></h3>
+          <h3><Badge bg="light" text="primary">CALLS</Badge></h3>
           <input
             onChange={e => setCallsFormData({ ...callsFormData, 'name': e.target.value})}
             placeholder="Who to call?"
@@ -140,7 +166,7 @@ function App() {
           </ListGroup>
           </ListGroup.Item>
           <ListGroup.Item>
-          <h3><Badge>OTHER</Badge></h3>
+          <h3><Badge bg="light" text="primary">OTHER</Badge></h3>
           <input
             onChange={e => setActionsFormData({ ...actionsFormData, 'name': e.target.value})}
             placeholder="Next action"
@@ -163,7 +189,7 @@ function App() {
           </ListGroup>
           </ListGroup.Item>        
           <ListGroup.Item>
-          <h3><Badge>ERRANDS</Badge></h3>
+          <h3><Badge bg="light" text="primary">ERRANDS</Badge></h3>
           <input
             onChange={e => setErrandsFormData({ ...errandsFormData, 'name': e.target.value})}
             placeholder="Errand"
@@ -188,17 +214,45 @@ function App() {
         </ListGroup>
         </Card.Body>
         </Card>
-        <Card><Card.Header>
-          <Nav variant="tabs" defaultActiveKey="#today">
-            <Nav.Item><Nav.Link href="#today">ONLY ON {new Date().toISOString().substring(0, 10)}</Nav.Link></Nav.Item>
-          </Nav>
-          <Nav>
+        <Card>
+          <Card.Header>
+            <Nav variant="tabs" defaultActiveKey="#today">
+            <Nav.Item><Nav.Link href="#today">ONLY ON <Badge bg="danger">{new Date().toISOString().substring(0, 10)}</Badge></Nav.Link></Nav.Item>
+            </Nav>
+            <Nav>
             <Nav.Item><Nav.Link href="#waitingFors">WEEK</Nav.Link></Nav.Item>
-          </Nav>
-          <Nav>
+            </Nav>
+            <Nav>
             <Nav.Item><Nav.Link href="#waitingFors">MONTH</Nav.Link></Nav.Item>
-          </Nav>
-        </Card.Header></Card>
+            </Nav>
+          </Card.Header>
+          <CardGroup>
+            <Card>
+              <h3><Badge bg="light" text="primary">TIME-SPECIFIC</Badge></h3>
+              <ReactAgenda
+                  minDate={now}
+                  maxDate={new Date(now.getFullYear(), now.getMonth()+3)}
+                  disablePrevButton={true}
+                  startDate={new Date()}
+                  cellHeight={15}
+                  locale={"fi"}
+                  items={items}
+                  numberOfDays={1}
+                  rowsPerHour={1}
+                  itemColors={colors}
+                  autoScale={false}
+                  fixedHeader={true}
+              />
+              <h3><Badge bg="light" text="success">ROUTINES</Badge></h3>
+            </Card>
+            <Card>
+              <h3><Badge bg="light" text="primary">DAY-SPECIFIC</Badge></h3>
+              <h3><Badge bg="light" text="primary">DUE BY TODAY</Badge></h3>
+              <h3><Badge bg="light" text="primary">START BY TODAY</Badge></h3>
+              <h3><Badge bg="light" text="success">DAY-SPECIFIC NOTES</Badge></h3>
+            </Card>
+          </CardGroup>
+        </Card>
       </CardGroup>
       <AmplifySignOut />
     </div>
