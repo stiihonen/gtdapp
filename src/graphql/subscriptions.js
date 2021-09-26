@@ -40,3 +40,42 @@ export const onDeleteTodo = /* GraphQL */ `
     }
   }
 `;
+export const onCreateRoutine = /* GraphQL */ `
+  subscription OnCreateRoutine {
+    onCreateRoutine {
+      id
+      name
+      description
+      earliestTime
+      todoCreatedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateRoutine = /* GraphQL */ `
+  subscription OnUpdateRoutine {
+    onUpdateRoutine {
+      id
+      name
+      description
+      earliestTime
+      todoCreatedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteRoutine = /* GraphQL */ `
+  subscription OnDeleteRoutine {
+    onDeleteRoutine {
+      id
+      name
+      description
+      earliestTime
+      todoCreatedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;

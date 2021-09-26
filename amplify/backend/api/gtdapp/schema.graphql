@@ -5,3 +5,11 @@ type Todo @model {
   tag: [String!]
   done: Boolean
 }
+
+type Routine @model {
+  id: ID!
+  name: String!
+  description: String
+  earliestTime: String
+  todoCreatedOn: String
+}

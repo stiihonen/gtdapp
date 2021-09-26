@@ -34,3 +34,36 @@ export const listTodos = /* GraphQL */ `
     }
   }
 `;
+export const getRoutine = /* GraphQL */ `
+  query GetRoutine($id: ID!) {
+    getRoutine(id: $id) {
+      id
+      name
+      description
+      earliestTime
+      todoCreatedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listRoutines = /* GraphQL */ `
+  query ListRoutines(
+    $filter: ModelRoutineFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listRoutines(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        name
+        description
+        earliestTime
+        todoCreatedOn
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

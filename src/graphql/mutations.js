@@ -49,3 +49,51 @@ export const deleteTodo = /* GraphQL */ `
     }
   }
 `;
+export const createRoutine = /* GraphQL */ `
+  mutation CreateRoutine(
+    $input: CreateRoutineInput!
+    $condition: ModelRoutineConditionInput
+  ) {
+    createRoutine(input: $input, condition: $condition) {
+      id
+      name
+      description
+      earliestTime
+      todoCreatedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateRoutine = /* GraphQL */ `
+  mutation UpdateRoutine(
+    $input: UpdateRoutineInput!
+    $condition: ModelRoutineConditionInput
+  ) {
+    updateRoutine(input: $input, condition: $condition) {
+      id
+      name
+      description
+      earliestTime
+      todoCreatedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteRoutine = /* GraphQL */ `
+  mutation DeleteRoutine(
+    $input: DeleteRoutineInput!
+    $condition: ModelRoutineConditionInput
+  ) {
+    deleteRoutine(input: $input, condition: $condition) {
+      id
+      name
+      description
+      earliestTime
+      todoCreatedOn
+      createdAt
+      updatedAt
+    }
+  }
+`;
