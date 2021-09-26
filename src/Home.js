@@ -118,7 +118,7 @@ export default function Home() {
             value={projectsFormData.name}
           />
           <input
-            onChange={e => setCallsFormData({ ...projectsFormData, 'description': e.target.value})}
+            onChange={e => setProjectsFormData({ ...projectsFormData, 'description': e.target.value})}
             placeholder="Project notes"
             value={projectsFormData.description}
           />
