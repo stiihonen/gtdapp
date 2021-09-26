@@ -47,12 +47,6 @@ export default function Home() {
   useEffect(() => {
     createRoutineTodos();
     fetchTodos();
-    const routineTodosInterval = setInterval(createRoutineTodos, 300000);
-    const fetchInterval = setInterval(fetchTodos, 30000);
-    return(() => {
-        clearInterval(routineTodosInterval)
-        clearInterval(fetchInterval)
-    })
   }, []);
 
   async function fetchTodos() {
