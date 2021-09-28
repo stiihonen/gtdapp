@@ -42,11 +42,12 @@ export default function Home() {
   const [errandsFormData, setErrandsFormData] = useState(initialFormState);
 
   useEffect(() => {
-  }, []);
-
-  useEffect(() => {
-    createRoutineTodos();
-    fetchTodos();
+    async function fetchAll() {
+      await createRoutineTodos();
+      fetchTodos();
+    }
+  
+    fetchAll();
   }, []);
 
   async function fetchTodos() {
